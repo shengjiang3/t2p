@@ -1,0 +1,38 @@
+
+.card-one {
+  background-color: #FFCCCC;
+  width: 45%;
+  margin: auto;
+}
+
+.card-two {
+  background-color: #FFFFFF;
+  width: 45%;
+  margin: auto;
+}
+
+.card-three {
+  width: 5%;
+  margin: auto;
+  background-color: #33CCCC;
+}
+
+button {
+  width: 100%;
+  height: 100%;
+  background-color: #33CCCC;
+}
+
+.card-three.button:hover {
+  background-color: #33CCCC;
+}
+
+.divider-one {
+  width: 45%;
+  margin: auto;
+}
+
+.divider-two {
+  width: 5%;
+  margin: auto;
+}
