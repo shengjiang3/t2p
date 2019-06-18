@@ -3,21 +3,37 @@
 h1 {
   font-family: 'Montserrat-Bold', 'Arial';
   font-size: 2rem;
-  padding-left: 2.2rem;
+  padding-left: 3.5rem;
+  width: 85%
 }
 
 h2 {
   font-family: 'Monument Grotesk', 'Arial';
-  font-size: 0.99rem;
+  font-size: 1.1rem;
   width: 90%;
-  padding-left: 2.2rem;
+  padding-left: 3.5rem;
+}
+
+h3 {
+  font-family: 'Montserrat-Bold', 'Arial';
+  font-size: 1.9rem;
+  padding-top: 4rem;
+  padding-left: 16rem;
+  margin-bottom: 0;
+}
+
+sub {
+  font-family: 'Inconsolata', 'Courier New';
+  font-size: 1.1rem;
+  padding-left: 16rem;
+  margin-top: none;
 }
 
 p {
-  font-family: 'Monument Grotesk', 'Arial';
-  font-size: 0.9rem;
+  font-family: 'Montserrat-Regular', 'Arial';
+  font-size: 0.95rem;
   width: 93%;
-  margin: auto;
+  /* margin: auto; */
 }
 
 button {
@@ -42,6 +58,21 @@ mat-slider {
 }
 
 .slider-format {
-  padding-top: 5rem;
-  padding-left: 3rem;
+  /* padding-top: 5rem;
+  padding-left: 3rem; */
+  /* margin: auto; */
+  position: absolute;
+  text-align: left;
+}
+
+/* .grid-text {
+  position: absolute;
+  padding-left: 10rem;
+
+} */
+
+.mat-grid-format {
+  width: 40%;
+  display: flex;
+  align-items: flex-start;
 }

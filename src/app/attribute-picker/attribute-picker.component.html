@@ -1,21 +1,85 @@
 <!-- <h1> TEST ROUTING</h1> -->
-
 <!DOCTYPE html>
-  <!-- <body>
-    <p>TESTING HEHE</p>
-  </body> -->
-  <mat-card-title class="card-title">
-    <h1>Choose your attributes</h1>
-    <h2>Use the sliders below to set the Honesty and Desirability attributes for each girlfriend. When you're finished,
-        click the Generate Characters button to start creating your storyline.</h2>
-  </mat-card-title>
-  <div class="slider-format">
-    <mat-slider
-      min="-5"
-      max="5"
-      step="1"
-      tickInterval="1"
-      value="0">
-    </mat-slider>
-  </div>
 
+<mat-card-title class="card-title">
+  <h1>Choose your attributes</h1>
+  <h2>Use the sliders below to set the Honesty and Desirability attributes for each girlfriend. When you're finished, click the Generate Characters button to start creating your storyline.</h2>
+</mat-card-title>
+
+<!-- Set POG attribute values -->
+<h3>POG</h3>
+<sub>Person of Obligation</sub>
+<mat-grid-list cols="2" rowWidth="300px" rowHeight="100px" class="mat-grid-format">
+  <mat-grid-tile>
+    <!-- <div class="grid-text"><p>Honesty</p></div> -->
+    <p style="padding-left: 9.5rem;">Honesty</p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <div class="slider-format">
+        <mat-slider
+          min="-5"
+          max="5"
+          step="1"
+          tickInterval="1"
+          value="0"
+          input [(ngModel)]="POG.honesty">
+        </mat-slider>
+      </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <!-- <div class="grid-text"><p>Desirability</p></div> -->
+      <p style="padding-left: 8.5rem;">Desirability</p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <div class="slider-format">
+        <mat-slider
+          min="-5"
+          max="5"
+          step="1"
+          tickInterval="1"
+          value="0"
+          input [(ngModel)]="POG.desirability">
+        </mat-slider>
+      </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<!-- Set POD attribute values -->
+<h3>POD</h3>
+<sub>Person of Desire</sub>
+<mat-grid-list cols="2" rowWidth="300px" rowHeight="100px" class="mat-grid-format">
+  <mat-grid-tile>
+    <!-- <div class="grid-text"><p>Honesty</p></div> -->
+    <p style="padding-left: 9.5rem;">Honesty</p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <div class="slider-format">
+        <mat-slider
+          min="-5"
+          max="5"
+          step="1"
+          tickInterval="1"
+          value="0"
+          input [(ngModel)]="POD.honesty">
+        </mat-slider>
+      </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <!-- <div class="grid-text"><p>Desirability</p></div> -->
+      <p style="padding-left: 8.5rem;">Desirability</p>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <div class="slider-format">
+        <mat-slider
+          min="-5"
+          max="5"
+          step="1"
+          tickInterval="1"
+          value="0"
+          input [(ngModel)]="POD.desirability">
+        </mat-slider>
+      </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<button>CLICK</button>

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, MatDividerModule, MatSliderModule } from '@angular/material';
+import { MatCardModule, MatButtonModule, MatDividerModule, MatSliderModule, MatGridListModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -33,7 +33,9 @@ const appRoutes: Routes = [
     MatCardModule,
     MatDividerModule,
     MatButtonModule,
-    MatSliderModule
+    MatSliderModule,
+    FormsModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
