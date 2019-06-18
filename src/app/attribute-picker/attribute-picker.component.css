@@ -1,0 +1,47 @@
+@import url(../fonts.css);
+
+h1 {
+  font-family: 'Montserrat-Bold', 'Arial';
+  font-size: 2rem;
+  padding-left: 2.2rem;
+}
+
+h2 {
+  font-family: 'Monument Grotesk', 'Arial';
+  font-size: 0.99rem;
+  width: 90%;
+  padding-left: 2.2rem;
+}
+
+p {
+  font-family: 'Monument Grotesk', 'Arial';
+  font-size: 0.9rem;
+  width: 93%;
+  margin: auto;
+}
+
+button {
+  background-color: #33CCCC;
+  width: 7%;
+  height: 5%;
+}
+
+.card-title {
+  width: 100%;
+  margin-top: none;
+  padding-top: 5rem;
+  background-color: #FFFFCC;
+}
+
+body {
+  background-color: #FFFFCC;
+}
+
+mat-slider {
+  width: 300px;
+}
+
+.slider-format {
+  padding-top: 5rem;
+  padding-left: 3rem;
+}

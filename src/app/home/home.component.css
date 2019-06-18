@@ -1,26 +1,69 @@
+@import url(../fonts.css);
+
+/* position: relative !important; for storyline generator */
+
+h1 {
+  font-family: 'Harbour', 'Arial';
+  text-align: center;
+  font-size: 3rem;
+}
+
+h2 {
+  font-family: 'Montserrat-Bold', 'Arial';
+  font-size: 0.99rem;
+  padding-bottom: 1.5%;
+  width: 93%;
+  margin: auto;
+}
+
+body {
+  background-color: #FFFFCC;
+}
+
+p {
+  font-family: 'Monument Grotesk', 'Arial';
+  font-size: 0.9rem;
+  width: 93%;
+  margin: auto;
+}
+
 
 .card-one {
   background-color: #FFCCCC;
   width: 45%;
   margin: auto;
+  transition: none !important;
+  box-shadow: none !important;
 }
 
 .card-two {
   background-color: #FFFFFF;
   width: 45%;
   margin: auto;
+  margin-bottom: 1.3rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.8rem;
+  transition: none !important;
+  box-shadow: none !important;
 }
 
-.card-three {
+/* .card-three {
   width: 5%;
   margin: auto;
   background-color: #33CCCC;
-}
+} */
 
 button {
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
   background-color: #33CCCC;
+  width: 7%;
+  height: 5%;
+}
+
+.button-format {
+  margin: 0;
+  text-align: center;
 }
 
 .card-three.button:hover {
@@ -35,4 +78,8 @@ button {
 .divider-two {
   width: 5%;
   margin: auto;
+}
+
+div.text-box {
+  border: 1px solid black;
 }
