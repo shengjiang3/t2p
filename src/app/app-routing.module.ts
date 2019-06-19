@@ -2,10 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AttributePickerComponent } from './attribute-picker/attribute-picker.component';
+import { StorylineGeneratorComponent } from './storyline-generator/storyline-generator.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'attribute-picker', component: AttributePickerComponent }
+  { path: 'attribute-picker', component: AttributePickerComponent },
+  { path: 'storyline-generator', component: StorylineGeneratorComponent}
   // when /attribute-picker URL is visited, router will generate attribute picker
 ];
 

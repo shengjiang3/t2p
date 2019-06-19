@@ -4,29 +4,21 @@ import { MatCardModule, MatButtonModule, MatDividerModule, MatSliderModule, MatG
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AttributePickerComponent } from './attribute-picker/attribute-picker.component';
+import { StorylineGeneratorComponent } from './storyline-generator/storyline-generator.component';
 
-const appRoutes: Routes = [
-  { path: 'attribute-picker', component: AttributePickerComponent },
-  // { path: '**', component: PageNotFoundComponent }
-];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AttributePickerComponent
+    AttributePickerComponent,
+    StorylineGeneratorComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

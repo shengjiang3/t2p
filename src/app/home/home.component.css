@@ -17,7 +17,10 @@ h2 {
 }
 
 body {
-  background-color: #FFFFCC;
+  background-color: #FFFFCC !important;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 p {
@@ -32,26 +35,20 @@ p {
   background-color: #FFCCCC;
   width: 45%;
   margin: auto;
+  margin-top: 5rem;
   transition: none !important;
   box-shadow: none !important;
 }
 
 .card-two {
-  background-color: #FFFFFF;
+  /* background-color: #FFFFFF; */
   width: 45%;
   margin: auto;
-  margin-bottom: 1.3rem;
+  /* margin-bottom: 1.3rem; */
   padding-top: 1.5rem;
-  padding-bottom: 1.8rem;
   transition: none !important;
   box-shadow: none !important;
 }
-
-/* .card-three {
-  width: 5%;
-  margin: auto;
-  background-color: #33CCCC;
-} */
 
 button {
   /* width: 100%;
@@ -64,10 +61,7 @@ button {
 .button-format {
   margin: 0;
   text-align: center;
-}
-
-.card-three.button:hover {
-  background-color: #33CCCC;
+  margin-top: 2rem;
 }
 
 .divider-one {
@@ -80,6 +74,6 @@ button {
   margin: auto;
 }
 
-div.text-box {
+/* div.text-box {
   border: 1px solid black;
-}
+} */

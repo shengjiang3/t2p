@@ -6,6 +6,7 @@
   <h2>Use the sliders below to set the Honesty and Desirability attributes for each girlfriend. When you're finished, click the Generate Characters button to start creating your storyline.</h2>
 </mat-card-title>
 
+<body>
 <!-- Set POG attribute values -->
 <h3>POG</h3>
 <sub>Person of Obligation</sub>
@@ -82,4 +83,17 @@
   </mat-grid-tile>
 </mat-grid-list>
 
-<button>CLICK</button>
+<div class="button-format">
+    <button mat-stroked-button layout-align="center">
+      <a routerLink="/storyline-generator">GENERATE CHARACTERS</a>
+    </button>
+</div>
+
+<div class="format-value-text">
+  <p>Honesty POG: {{ POG.honesty }}</p>
+  <p>Desirability POD: {{ POG.desirability }}</p>
+  <p>Honesty POD: {{ POD.honesty }}</p>
+  <p>Desirability POD: {{ POD.desirability }}</p>
+</div>
+
+</body>
