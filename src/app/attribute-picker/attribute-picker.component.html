@@ -12,7 +12,6 @@
 <sub>Person of Obligation</sub>
 <mat-grid-list cols="2" rowWidth="300px" rowHeight="100px" class="mat-grid-format">
   <mat-grid-tile>
-    <!-- <div class="grid-text"><p>Honesty</p></div> -->
     <p style="padding-left: 9.5rem;">Honesty</p>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -28,7 +27,6 @@
       </div>
   </mat-grid-tile>
   <mat-grid-tile>
-      <!-- <div class="grid-text"><p>Desirability</p></div> -->
       <p style="padding-left: 8.5rem;">Desirability</p>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -50,7 +48,6 @@
 <sub>Person of Desire</sub>
 <mat-grid-list cols="2" rowWidth="300px" rowHeight="100px" class="mat-grid-format">
   <mat-grid-tile>
-    <!-- <div class="grid-text"><p>Honesty</p></div> -->
     <p style="padding-left: 9.5rem;">Honesty</p>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -66,7 +63,6 @@
       </div>
   </mat-grid-tile>
   <mat-grid-tile>
-      <!-- <div class="grid-text"><p>Desirability</p></div> -->
       <p style="padding-left: 8.5rem;">Desirability</p>
   </mat-grid-tile>
   <mat-grid-tile>
@@ -85,15 +81,15 @@
 
 <div class="button-format">
     <button mat-stroked-button layout-align="center">
-      <a routerLink="/storyline-generator">GENERATE CHARACTERS</a>
+      <a routerLink="/storyline-generator" [state]="{ attributeValues : this.attributeValues }">GENERATE CHARACTERS</a>
     </button>
 </div>
 
-<div class="format-value-text">
+<!-- <div class="format-value-text">
   <p>Honesty POG: {{ POG.honesty }}</p>
   <p>Desirability POD: {{ POG.desirability }}</p>
   <p>Honesty POD: {{ POD.honesty }}</p>
   <p>Desirability POD: {{ POD.desirability }}</p>
-</div>
+</div> -->
 
 </body>

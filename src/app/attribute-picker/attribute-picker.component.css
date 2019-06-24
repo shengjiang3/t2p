@@ -36,12 +36,6 @@ p {
   /* margin: auto; */
 }
 
-button {
-  background-color: #33CCCC;
-  width: 7%;
-  height: 5%;
-}
-
 .card-title {
   width: 100%;
   padding-top: 3rem;
@@ -106,8 +100,8 @@ button {
   /* width: 100%;
   height: 100%; */
   background-color: #33CCCC;
-  width: 15%;
-  height: 5%;
+  width: 12rem;
+  height: 2.6rem;;
 }
 
 .button-format {
@@ -118,4 +112,10 @@ button {
 
 .format-value-text {
   margin-left: 3.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+  text-align: center;
 }

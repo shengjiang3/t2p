@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AttributePickerComponent } from './attribute-picker/attribute-picker.component';
 import { StorylineGeneratorComponent } from './storyline-generator/storyline-generator.component';
+import { StorySummaryComponent } from './story-summary/story-summary.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { StorylineGeneratorComponent } from './storyline-generator/storyline-gen
     AppComponent,
     HomeComponent,
     AttributePickerComponent,
-    StorylineGeneratorComponent
+    StorylineGeneratorComponent,
+    StorySummaryComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-attribute-picker',
   templateUrl: './attribute-picker.component.html',
-  styleUrls: ['./attribute-picker.component.css']
+  styleUrls: ['./attribute-picker.component.css'],
 })
 
 export class AttributePickerComponent {
@@ -17,7 +17,13 @@ export class AttributePickerComponent {
     desirability: 0
   };
 
-  // honestyPOG = 0;
+  attributeValues = [
+    this.POG.honesty,
+    this.POG.desirability,
+    this.POD.honesty,
+    this.POD.desirability
+  ];
+
   // honestyPOD = 0;
   // desirabilityPOG = 0;
   // desirabilityPOD = 0;

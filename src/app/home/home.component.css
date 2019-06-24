@@ -30,6 +30,10 @@ p {
   margin: auto;
 }
 
+a {
+  text-decoration: none;
+  color: #000000;
+}
 
 .card-one {
   background-color: #FFCCCC;
