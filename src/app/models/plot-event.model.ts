@@ -1,17 +1,19 @@
 export class Plot {
   name: string;
-  partner: string;
+  partner: string[];
   act: string;
-  preselection: string;
-  attributeValues: number;
+  preselection?: string;
+  desirabilityValues: number[];
+  honestyValues: number[];
   fill: boolean;
 
-  constructor(name, partner, act, preselection, attributeValues, fill) {
+  constructor(name: string, partner: string[], act: string, preselection: string, desirabilityValues: number[], honestyValues: number[], fill: boolean) {
     this.name = name;
     this.partner = partner;
     this.act = act;
     this.preselection = preselection;
-    this.attributeValues = attributeValues;
+    this.desirabilityValues = desirabilityValues;
+    this.honestyValues = honestyValues;
     this.fill = false;
   }
 }
