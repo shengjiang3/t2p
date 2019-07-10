@@ -1,6 +1,6 @@
 export class POG {
-   honesty: number;
-   desirability: number;
+  honesty: number;
+  desirability: number;
 
   constructor(honesty: number, desirability: number) {
     this.honesty = honesty;
