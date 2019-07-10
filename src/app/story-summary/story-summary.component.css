@@ -100,6 +100,16 @@ button {
   margin-left: 3.5rem;
 }
 
+mat-card {
+  width: 8rem;
+  height: 3.5rem;
+  margin: auto;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
 /* mat-card {
   width: 70%;
   margin: auto;

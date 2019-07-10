@@ -17,12 +17,14 @@
   <mat-grid-tile>
       <div class="slider-format">
         <mat-slider
-          min="-5"
-          max="5"
+          min="-2"
+          max="2"
           step="1"
           tickInterval="1"
           value="0"
-          input [(ngModel)]="POG.honesty">
+          (input)="onPOGHonestySliderChange($event)">
+          <!-- input [(ngModel)]="POG.honesty" -->
+          <!-- (input)="onSliderChange($event)" -->
         </mat-slider>
       </div>
   </mat-grid-tile>
@@ -32,12 +34,12 @@
   <mat-grid-tile>
       <div class="slider-format">
         <mat-slider
-          min="-5"
-          max="5"
+          min="-2"
+          max="2"
           step="1"
           tickInterval="1"
           value="0"
-          input [(ngModel)]="POG.desirability">
+          (input)="onPOGDesirabilitySliderChange($event)">
         </mat-slider>
       </div>
   </mat-grid-tile>
@@ -53,12 +55,12 @@
   <mat-grid-tile>
       <div class="slider-format">
         <mat-slider
-          min="-5"
-          max="5"
+          min="-2"
+          max="2"
           step="1"
           tickInterval="1"
           value="0"
-          input [(ngModel)]="POD.honesty">
+          (input)="onPODHonestySliderChange($event)">
         </mat-slider>
       </div>
   </mat-grid-tile>
@@ -68,12 +70,12 @@
   <mat-grid-tile>
       <div class="slider-format">
         <mat-slider
-          min="-5"
-          max="5"
+          min="-2"
+          max="2"
           step="1"
           tickInterval="1"
           value="0"
-          input [(ngModel)]="POD.desirability">
+          (input)="onPOGDesirabilitySliderChange($event)">
         </mat-slider>
       </div>
   </mat-grid-tile>
@@ -81,7 +83,7 @@
 
 <div class="button-format">
     <button mat-stroked-button layout-align="center">
-      <a routerLink="/storyline-generator" [state]="{ attributeValues : this.attributeValues }">GENERATE CHARACTERS</a>
+      <a href="#" (click)="navigate($event)">GENERATE</a>
     </button>
 </div>
 

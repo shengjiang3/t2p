@@ -6,6 +6,8 @@
 </mat-card-title>
 
 <body>
+  <p>PASSED VALUE: {{ honestyPOG }}</p>
+
   <mat-grid-list cols="6" rowHeight="2:1">
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile><h3>Opening</h3></mat-grid-tile>
@@ -15,9 +17,15 @@
     <mat-grid-tile><h3>Consequence</h3></mat-grid-tile>
 
     <mat-grid-tile><h3>POG</h3></mat-grid-tile>
-    <mat-grid-tile><p>blank</p></mat-grid-tile>
-    <mat-grid-tile><p>blank</p></mat-grid-tile>
-    <mat-grid-tile><p>blank</p></mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card><p>In a relationship</p></mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile><p>
+        <mat-card><p></p></mat-card>
+    </p></mat-grid-tile>
+    <mat-grid-tile><p>
+        <mat-card><p></p></mat-card>
+    </p></mat-grid-tile>
     <mat-grid-tile><p>blank</p></mat-grid-tile>
     <mat-grid-tile><p>blank</p></mat-grid-tile>
 
@@ -29,7 +37,7 @@
     <mat-grid-tile><p>blank</p></mat-grid-tile>
   </mat-grid-list>
 
-  <mat-card>
+  <mat-card class="selector">
     <h4>Choose a situation for the POG and POD.</h4>
   </mat-card>
 

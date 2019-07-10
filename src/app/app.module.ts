@@ -18,7 +18,7 @@ import { StorySummaryComponent } from './story-summary/story-summary.component';
     HomeComponent,
     AttributePickerComponent,
     StorylineGeneratorComponent,
-    StorySummaryComponent
+    StorySummaryComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +29,7 @@ import { StorySummaryComponent } from './story-summary/story-summary.component';
     MatButtonModule,
     MatSliderModule,
     FormsModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
