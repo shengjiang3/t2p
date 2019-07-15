@@ -13,15 +13,11 @@ import { Plot } from '../models/plot-event.model';
 })
 
 export class StorylineGeneratorComponent implements OnInit {
-  // POD: POD;
-  // POG: POG;
-
-  constructor() {
-    // this.POD = new POD(0, 0);
-    // this.POG = new POG(0, 0);
-  }
+  POD: POD;
+  POG: POG;
 
   private plotEvents: Plot[] = [];
+  cards: Plot[] = [];
 
   // plot event arrays for each act for the POG
   private openingEventsPOG: Plot[] = [];
@@ -35,25 +31,11 @@ export class StorylineGeneratorComponent implements OnInit {
   private crisisEventsPOD: Plot[] = [];
   private choiceEventsPOD: Plot[] = [];
 
-  private cards: Plot[] = [];
-
-  // plotEvents.push(new Plot('In a relationship', 'POG', 'Opening', null, null, false));
-
-  POG = {
-    honesty: 0,
-    desirability: 0,
-  };
-
-  POD = {
-    honesty: 0,
-    desirability: 0,
-  };
+  constructor() { }
 
   ngOnInit() {
-    this.POG.honesty = window.history.state.POGHonesty;
-    this.POG.desirability = window.history.state.POGDesirability;
-    this.POD.honesty = window.history.state.PODHonesty;
-    this.POD.desirability = window.history.state.PODDesirability;
+    this.POG = new POG(window.history.state.honesty, window.history.state.desirability);
+    this.POD = new POD(window.history.state.honesty, window.history.state.desirability);
 
     this.plotEvents.push(new Plot('In a relationship', ['POG'], 'Opening', null, null, null));
     this.plotEvents.push(new Plot('Dating', ['POG', 'POD'], 'Opening', null, null, null));
@@ -80,67 +62,79 @@ export class StorylineGeneratorComponent implements OnInit {
 
     // populate initial options
     // iterate after each act to check for pre-selections
-    // this.plotEvents.forEach(plot => {
-    //   if (plot.act === 'Opening') { // populate opening act options for POG & POD
-    //     if (plot.partner[0] === 'POG') {
-    //       this.openingEventsPOG.push(plot);
-    //     }
-    //     if (plot.partner[0] === 'POD' || plot.partner[1] === 'POD') {
-    //       this.openingEventsPOD.push(plot);
-    //     }
-    //   }
-    //   if (plot.act === 'Disruption') { // populate disruption act
-    //     if (plot.partner[0] === 'POG') {
-    //       if (plot.desirabilityValues == null) {
-    //         this.disruptionEventsPOG.push(plot);
-    //       }
-    //       if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -1) {
-    //         this.disruptionEventsPOG.push(plot);
-    //       }
-    //       if (this.POG.honesty < 0 && plot.honestyValues[0] === -1) {
-    //         this.disruptionEventsPOG.push(plot);
-    //       }
-    //       if (this.POD.desirability > 0 && plot.preselection === 'G.O. is jealous') {
-    //         this.disruptionEventsPOG.push(plot);
-    //       }
-    //     }
-    //     if (plot.partner[0] === 'POD' || plot.partner[1] === 'POD') {
-    //       if (plot.desirabilityValues == null) {
-    //         this.disruptionEventsPOD.push(plot);
-    //       }
-    //       if (this.POD.desirability > 0 && plot.desirabilityValues[0] === 1) {
-    //         this.disruptionEventsPOD.push(plot);
-    //       }
-    //       if (plot.preselection === 'GWEN suffers from violence') {
-    //         this.disruptionEventsPOG.push(plot);
-    //       }
-    //     }
-    //   }
-    //   if (plot.act === 'Crisis') {
-    //     if (plot.partner[0] === 'POG') {
-    //       if (plot.desirabilityValues == null && plot.honestyValues == null) {
-    //         this.crisisEventsPOG.push(plot);
-    //       }
-    //       if (this.POG.honesty < 0 && plot.honestyValues[0] === -1) {
-    //         this.crisisEventsPOG.push(plot);
-    //       }
-    //       if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -1) {
-    //         this.crisisEventsPOG.push(plot);
-    //       }
-    //     }
-    //     if (plot.partner[0] === 'POD' || plot.partner[1] === 'POD') {
-    //       if (plot.desirabilityValues == null && plot.honestyValues == null) {
-    //         this.crisisEventsPOG.push(plot);
-    //       }
-    //     }
-    //   }
-    //   if (plot.act === 'Choice') {
-    //     this.choiceEventsPOG.push(plot);
-    //     this.choiceEventsPOD.push(plot); // remove POG choice for POD later
-    //   }
-    // });
+    this.plotEvents.forEach(plot => {
+      if (plot.act === 'Opening') { // populate opening act options for POG & POD
+        if (plot.partner.includes('POG')) {
+          this.openingEventsPOG.push(plot);
+        }
+        if (plot.partner.includes('POD')) {
+          if (plot.desirabilityValues == null && plot.honestyValues == null) {
+            this.openingEventsPOD.push(plot);
+          } else {
+            // if (this.POD.desirability > 0 && plot.desirabilityValues[0] === 1) {
+            if (this.POD.desirability > 0 && plot.desirabilityValues[0] === 1) {
+              this.openingEventsPOD.push(plot);
+            }
+          }
+        }
+      }
+      if (plot.act === 'Disruption') { // populate disruption act
+        if (plot.partner.includes('POG')) {
+          if (plot.desirabilityValues == null && plot.honestyValues == null) {
+            this.disruptionEventsPOG.push(plot);
+          } else {
+            if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -1) {
+              this.disruptionEventsPOG.push(plot);
+            }
+            if (this.POG.honesty < 0 && plot.honestyValues[0] === -1) {
+              this.disruptionEventsPOG.push(plot);
+            }
+          }
+          // if (this.POD.desirability > 0 && plot.preselection === 'G.O. is jealous') {
+          //   this.disruptionEventsPOG.push(plot);
+          // }
+        }
+        if (plot.partner.includes('POD')) {
+          if (plot.desirabilityValues == null && plot.honestyValues == null) {
+            this.disruptionEventsPOD.push(plot);
+          } else {
+            if (this.POD.desirability > 0 && plot.desirabilityValues[0] === 1) {
+              this.disruptionEventsPOD.push(plot);
+            }
+          }
+          // if (plot.preselection === 'GWEN suffers from violence') { // how to check for previous act selection
+          //   this.disruptionEventsPOG.push(plot);
+          // }
+        }
+      }
+      if (plot.act === 'Crisis') {
+        if (plot.partner.includes('POG')) {
+          if (plot.desirabilityValues == null && plot.honestyValues == null) {
+            this.crisisEventsPOG.push(plot);
+          } else {
+            if (this.POG.honesty < 0 && plot.honestyValues[0] === -1) {
+              this.crisisEventsPOG.push(plot);
+            }
+            if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -1) {
+              this.crisisEventsPOG.push(plot);
+            }
+          }
+        }
+        if (plot.partner.includes('POD')) {
+          if (plot.desirabilityValues == null && plot.honestyValues == null) {
+            this.crisisEventsPOG.push(plot);
+          }
+        }
+      }
+      if (plot.act === 'Choice') {
+        this.choiceEventsPOG.push(plot);
+        this.choiceEventsPOD.push(plot); // remove POG's choice for POD later
+      }
+    });
 
-    console.log('Disruption events POD length: ' + this.disruptionEventsPOD.length);
-    // console.log('Crisis events POD length: ' + this.crisisEventsPOD.length);
+    console.log('Opening events POG (Honesty: -1, Desirability: -1): ' + this.openingEventsPOG.length);
+    console.log('Opening events POD (Honesty: +1, Desirability: +1:' + this.openingEventsPOD.length);
+
+    this.cards = this.openingEventsPOG;
   }
 }

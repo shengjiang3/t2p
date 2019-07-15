@@ -7,19 +7,19 @@ export class POD {
     this.desirability = desirability;
   }
 
-  get getHonesty(): number {
+  getHonesty() {
     return this.honesty;
   }
 
-  set setHonesty(honesty: number) {
+  setHonesty(honesty: number) {
     this.honesty = honesty;
   }
 
-  get getDesirability(): number {
+  getDesirability() {
     return this.desirability;
   }
 
-  set setDesirability(desirability: number) {
+  setDesirability(desirability: number) {
     this.desirability = desirability;
   }
 }

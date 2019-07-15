@@ -6,7 +6,7 @@ export class Plot {
   desirabilityValues: number[];
   honestyValues: number[];
 
-  constructor(name: string, partner: string[], act: string, preselection: string, desirabilityValues:   number[], honestyValues: number[]) {
+  constructor(name: string, partner: string[], act: string, preselection: string, desirabilityValues: number[], honestyValues: number[]) {
     this.name = name;
     this.partner = partner;
     this.act = act;
