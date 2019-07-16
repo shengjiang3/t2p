@@ -37,9 +37,17 @@
 
   <mat-card class="selector">
     <h4>Choose a situation for the POG and POD.</h4>
-    <mat-card class="options" *ngFor="let card of cards; let i = index">
+    <!-- <mat-card class="options" *ngFor="let card of cards; let i = index">
       <div id="{{ 'option' + i }}">{{ card.name }}</div>
-    </mat-card>
+    </mat-card> -->
+    <div cdkDrop (cdkDropDropped)="dropped($event)">
+      <mat-card class="options" *ngFor="let card of cards; let i = index" cdkDrag>
+        <div id="{{ 'option' + i }}">{{ card.name }}</div>
+      </mat-card>
+      <!-- <div *ngFor="let card of cards; let i = index" cdkDrag>
+        <div id="{{ 'option' + i }}">{{ card.name }}</div>
+      </div> -->
+    </div>
   </mat-card>
 
   <div class="button-format">

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from "@angular/core";
 import { POD } from '../models/pod.model';
 import { POG } from '../models/pog.model';
 import { Plot } from '../models/plot-event.model';
+import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
 // import { Router } from '@angular/router';
 
 // todo: calculate score of POD and POG at Consequence act
@@ -18,6 +20,7 @@ export class StorylineGeneratorComponent implements OnInit {
 
   private plotEvents: Plot[] = [];
   cards: Plot[] = [];
+  selectedEvents: Plot[] = [];
 
   // plot event arrays for each act for the POG
   private openingEventsPOG: Plot[] = [];
@@ -32,6 +35,23 @@ export class StorylineGeneratorComponent implements OnInit {
   private choiceEventsPOD: Plot[] = [];
 
   constructor() { }
+
+  dropped(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        this.cards,
+        event.previousIndex,
+        event.currentIndex
+       );
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
 
   ngOnInit() {
     this.POG = new POG(window.history.state.honesty, window.history.state.desirability);
@@ -122,7 +142,7 @@ export class StorylineGeneratorComponent implements OnInit {
         }
         if (plot.partner.includes('POD')) {
           if (plot.desirabilityValues == null && plot.honestyValues == null) {
-            this.crisisEventsPOG.push(plot);
+            this.crisisEventsPOD.push(plot);
           }
         }
       }

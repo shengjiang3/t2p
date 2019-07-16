@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule, MatButtonModule, MatDividerModule, MatSliderModule, MatGridListModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { StorySummaryComponent } from './story-summary/story-summary.component';
     MatSliderModule,
     FormsModule,
     MatGridListModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
