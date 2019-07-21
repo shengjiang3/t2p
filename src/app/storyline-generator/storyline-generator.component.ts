@@ -21,6 +21,7 @@ export class StorylineGeneratorComponent implements OnInit {
 
   step = 'OpeningPOG'; // initial switch statement case
   selection = ''; // user selectied plot event
+  show = false; // card hidden by default
   filledPOG = false;
   filledPOD = false;
 
@@ -165,6 +166,7 @@ export class StorylineGeneratorComponent implements OnInit {
         if (this.filledPOG === false) {
           this.selectedEventsPOG.push(card.name);
           this.filledPOG = true;
+          this.toggleShow();
           this.cards = this.openingEventsPOD;
           this.step = 'OpeningPOD';
           console.log('POG: ' + `${this.selectedEventsPOG}`);
@@ -250,8 +252,12 @@ export class StorylineGeneratorComponent implements OnInit {
       }
     }
   }
-}
 
+  toggleShow() {
+    this.show = ! this.show;
+    console.log('show status: ' + this.show);
+  }
+}
 // function deselect(card: any) {
 
 // }
