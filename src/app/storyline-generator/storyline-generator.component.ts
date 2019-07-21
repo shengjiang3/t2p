@@ -1,12 +1,13 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
 import { POD } from '../models/pod.model';
 import { POG } from '../models/pog.model';
 import { Plot } from '../models/plot-event.model';
 import { CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-
-// import { Router } from '@angular/router';
+import { deepStrictEqual } from 'assert';
 
 // todo: calculate score of POD and POG at Consequence act
+
+// declare function initialize(): any;
 
 @Component({
   selector: 'app-storyline-generator',
@@ -18,9 +19,15 @@ export class StorylineGeneratorComponent implements OnInit {
   POD: POD;
   POG: POG;
 
-  private plotEvents: Plot[] = [];
-  cards: Plot[] = [];
-  selectedEvents: Plot[] = [];
+  step = 'OpeningPOG'; // initial switch statement case
+  selection = ''; // user selectied plot event
+  filledPOG = false;
+  filledPOD = false;
+
+  private plotEvents: Plot[] = []; // holds all possible plot events
+  cards: Plot[] = []; // options that show up for selection
+  selectedEventsPOG: string[] = []; // selected options for POG
+  selectedEventsPOD: string[] = []; // selected options for POD
 
   // plot event arrays for each act for the POG
   private openingEventsPOG: Plot[] = [];
@@ -36,24 +43,24 @@ export class StorylineGeneratorComponent implements OnInit {
 
   constructor() { }
 
-  dropped(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        this.cards,
-        event.previousIndex,
-        event.currentIndex
-       );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
+  // drop(event: CdkDragDrop<string[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex
+  //      );
+  //   } else {
+  //     transferArrayItem(
+  //       event.previousContainer.data,
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex
+  //     );
+  //   }
+  // }
 
-  ngOnInit() {
+  ngOnInit() { // generate possible plot options for each act on page load
     this.POG = new POG(window.history.state.honesty, window.history.state.desirability);
     this.POD = new POD(window.history.state.honesty, window.history.state.desirability);
 
@@ -65,7 +72,7 @@ export class StorylineGeneratorComponent implements OnInit {
     this.plotEvents.push(new Plot('Disagreement in relationship', ['POG', 'POD'], 'Disruption', null, null, null));
     this.plotEvents.push(new Plot('Seduction', ['POD'], 'Disruption', null, [1, 2], null));
     this.plotEvents.push(new Plot('GWEN suffers from violence', ['POG'], 'Disruption', null, [-2, -1], null));
-    this.plotEvents.push(new Plot('G.O. is jealous', ['POG'], 'Disruption', null, null, null));
+    this.plotEvents.push(new Plot('G.O. is jealous', ['POG'], 'Disruption', null, [1, 2], null));
     this.plotEvents.push(new Plot('Get emotional support', ['POD'], 'Disruption', 'GWEN suffers from violence', null, null));
     this.plotEvents.push(new Plot('Suspicious of disloyalty', ['POG'], 'Disruption', null, null, [-2, -1]));
 
@@ -83,7 +90,7 @@ export class StorylineGeneratorComponent implements OnInit {
     // populate initial options
     // iterate after each act to check for pre-selections
     this.plotEvents.forEach(plot => {
-      if (plot.act === 'Opening') { // populate opening act options for POG & POD
+      if (plot.act === 'Opening') {
         if (plot.partner.includes('POG')) {
           this.openingEventsPOG.push(plot);
         }
@@ -91,28 +98,25 @@ export class StorylineGeneratorComponent implements OnInit {
           if (plot.desirabilityValues == null && plot.honestyValues == null) {
             this.openingEventsPOD.push(plot);
           } else {
-            // if (this.POD.desirability > 0 && plot.desirabilityValues[0] === 1) {
             if (this.POD.desirability > 0 && plot.desirabilityValues[0] === 1) {
               this.openingEventsPOD.push(plot);
             }
           }
         }
       }
-      if (plot.act === 'Disruption') { // populate disruption act
+      if (plot.act === 'Disruption') {
         if (plot.partner.includes('POG')) {
           if (plot.desirabilityValues == null && plot.honestyValues == null) {
             this.disruptionEventsPOG.push(plot);
           } else {
-            if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -1) {
+            if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -2) {
               this.disruptionEventsPOG.push(plot);
-            }
-            if (this.POG.honesty < 0 && plot.honestyValues[0] === -1) {
+            } else if (this.POG.honesty < 0 && plot.honestyValues[0] === -2) {
+              this.disruptionEventsPOG.push(plot);
+            } else if (this.POD.desirability > 0) {
               this.disruptionEventsPOG.push(plot);
             }
           }
-          // if (this.POD.desirability > 0 && plot.preselection === 'G.O. is jealous') {
-          //   this.disruptionEventsPOG.push(plot);
-          // }
         }
         if (plot.partner.includes('POD')) {
           if (plot.desirabilityValues == null && plot.honestyValues == null) {
@@ -132,10 +136,10 @@ export class StorylineGeneratorComponent implements OnInit {
           if (plot.desirabilityValues == null && plot.honestyValues == null) {
             this.crisisEventsPOG.push(plot);
           } else {
-            if (this.POG.honesty < 0 && plot.honestyValues[0] === -1) {
+            if (this.POG.honesty < 0 && plot.honestyValues[0] === -2) {
               this.crisisEventsPOG.push(plot);
             }
-            if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -1) {
+            if (this.POG.desirability < 0 && plot.desirabilityValues[0] === -2) {
               this.crisisEventsPOG.push(plot);
             }
           }
@@ -152,9 +156,102 @@ export class StorylineGeneratorComponent implements OnInit {
       }
     });
 
-    console.log('Opening events POG (Honesty: -1, Desirability: -1): ' + this.openingEventsPOG.length);
-    console.log('Opening events POD (Honesty: +1, Desirability: +1:' + this.openingEventsPOD.length);
-
     this.cards = this.openingEventsPOG;
   }
+
+  ngOnClick(card: any) {
+    switch (this.step) {
+      case 'OpeningPOG': {
+        if (this.filledPOG === false) {
+          this.selectedEventsPOG.push(card.name);
+          this.filledPOG = true;
+          this.cards = this.openingEventsPOD;
+          this.step = 'OpeningPOD';
+          console.log('POG: ' + `${this.selectedEventsPOG}`);
+        }
+        break;
+      }
+      case 'OpeningPOD': {
+        if (this.filledPOG === true && this.filledPOD === false) {
+          this.selectedEventsPOD.push(card.name);
+          this.filledPOD = true;
+          this.filledPOG = false;
+          this.cards = this.disruptionEventsPOG;
+          this.step = 'DisruptionPOG';
+          console.log('POD: ' + `${this.selectedEventsPOD}`);
+        }
+        break;
+      }
+      case 'DisruptionPOG': {
+        if (this.filledPOG === false && this.filledPOD === true) {
+          this.selectedEventsPOG.push(card.name);
+          this.filledPOG = true;
+          this.filledPOD = false;
+          this.cards = this.disruptionEventsPOD;
+          this.step = 'DisruptionPOD';
+          console.log('POG: ' + `${this.selectedEventsPOG}`);
+        }
+        break;
+      }
+      case 'DisruptionPOD': {
+        if (this.filledPOG === true && this.filledPOD === false) {
+          this.selectedEventsPOD.push(card.name);
+          this.filledPOD = true;
+          this.filledPOG = false;
+          this.cards = this.crisisEventsPOG;
+          this.step = 'CrisisPOG';
+          console.log('POD: ' + `${this.selectedEventsPOD}`);
+        }
+        break;
+      }
+      case 'CrisisPOG': {
+        if (this.filledPOG === false && this.filledPOD === true) {
+          this.selectedEventsPOG.push(card.name);
+          this.filledPOG = true;
+          this.filledPOD = false;
+          this.cards = this.crisisEventsPOD;
+          this.step = 'CrisisPOD';
+          console.log('POD: ' + `${this.selectedEventsPOG}`);
+        }
+        break;
+      }
+      case 'CrisisPOD': {
+        if (this.filledPOG === true && this.filledPOD === false) {
+          this.selectedEventsPOD.push(card.name);
+          this.filledPOD = true;
+          this.filledPOG = false;
+          this.cards = this.choiceEventsPOG;
+          this.step = 'ChoicePOG';
+          console.log('POD: ' + `${this.selectedEventsPOD}`);
+        }
+        break;
+      }
+      case 'ChoicePOG': {
+        if (this.filledPOG === false && this.filledPOD === true) {
+          this.selectedEventsPOG.push(card.name);
+          this.filledPOG = true;
+          this.filledPOD = false;
+          this.cards = this.choiceEventsPOD;
+          this.step = 'ChoicePOD';
+          console.log('POD: ' + `${this.selectedEventsPOG}`);
+        }
+        break;
+      }
+      case 'ChoicePOD': {
+        if (this.filledPOG === true && this.filledPOD === false) {
+          this.selectedEventsPOD.push(card.name);
+          this.filledPOD = true;
+          this.filledPOG = false;
+          this.cards = this.choiceEventsPOG;
+          this.step = 'ChoicePOG';
+          console.log('POD: ' + `${this.selectedEventsPOD}`);
+        }
+        break;
+      }
+    }
+  }
 }
+
+// function deselect(card: any) {
+
+// }
