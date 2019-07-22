@@ -16,17 +16,18 @@
 
     <mat-grid-tile><h3>POG</h3></mat-grid-tile>
     <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><div mat-card *ngIf="show"></div></mat-grid-tile>
-    <mat-grid-tile><div mat-card></div></mat-grid-tile>
-    <mat-grid-tile><div mat-card></div></mat-grid-tile>
-    <mat-grid-tile><div mat-card></div></mat-grid-tile>
+    <mat-grid-tile><mat-card *ngIf="showDisruptionPOG"></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card *ngIf="showConflictPOG"></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card *ngIf="showChoicePOG"></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
 
     <mat-grid-tile><h3>POD</h3></mat-grid-tile>
-    <mat-grid-tile><div mat-card></div></mat-grid-tile>
+    <mat-grid-tile><mat-card *ngIf="showOpeningPOD"></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card *ngIf="showDisruptionPOD"></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card *ngIf="showConflictPOD"></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card *ngIf="showChoicePOD"></mat-card></mat-grid-tile>
     <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
+
   </mat-grid-list>
 
   <mat-card class="selector">
