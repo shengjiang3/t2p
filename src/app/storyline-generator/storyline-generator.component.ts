@@ -29,11 +29,12 @@ export class StorylineGeneratorComponent implements OnInit {
   showDisruptionPOD = false;
   showConflictPOD = false;
   showChoicePOD = false;
+  showConsequence = false;
 
   filledPOG = false;
   filledPOD = false;
 
-  textOpeningPOG = false;
+  textOpeningPOG = false; // show text if a card has been selected
   textOpeningPOD = false;
   textDisruptionPOG = false;
   textDisruptionPOD = false;
@@ -41,8 +42,9 @@ export class StorylineGeneratorComponent implements OnInit {
   textConflictPOD = false;
   textChoicePOG = false;
   textChoicePOD = false;
+  textConsequence = false;
 
-  selectionOpeningPOG = '';
+  selectionOpeningPOG = ''; // selected card
   selectionOpeningPOD = '';
   selectionDisruptionPOG = '';
   selectionDisruptionPOD = '';
@@ -50,6 +52,7 @@ export class StorylineGeneratorComponent implements OnInit {
   selectionConflictPOD = '';
   selectionChoicePOG = '';
   selectionChoicePOD = '';
+  consequence = '';
 
   private plotEvents: Plot[] = []; // holds all possible plot events
   cards: Plot[] = []; // options that show up
@@ -67,6 +70,9 @@ export class StorylineGeneratorComponent implements OnInit {
   private disruptionEventsPOD: Plot[] = [];
   private crisisEventsPOD: Plot[] = [];
   private choiceEventsPOD: Plot[] = [];
+
+  private scorePOG: number;
+  private scorePOD: number;
 
   constructor() { }
 
@@ -91,27 +97,29 @@ export class StorylineGeneratorComponent implements OnInit {
     this.POG = new POG(window.history.state.honesty, window.history.state.desirability);
     this.POD = new POD(window.history.state.honesty, window.history.state.desirability);
 
-    this.plotEvents.push(new Plot('In a relationship', ['POG'], 'Opening', null, null, null));
-    this.plotEvents.push(new Plot('Dating', ['POG', 'POD'], 'Opening', null, null, null));
-    this.plotEvents.push(new Plot('Encounter', ['POD'], 'Opening', null, null, null));
-    this.plotEvents.push(new Plot('Love at first sight', ['POD'], 'Opening', null, [1, 2], null));
+    console.log('POD desirability: ' + this.POD.desirability);
 
-    this.plotEvents.push(new Plot('Disagreement in relationship', ['POG', 'POD'], 'Disruption', null, null, null));
-    this.plotEvents.push(new Plot('Seduction', ['POD'], 'Disruption', null, [1, 2], null));
-    this.plotEvents.push(new Plot('GWEN suffers from violence', ['POG'], 'Disruption', null, [-2, -1], null));
-    this.plotEvents.push(new Plot('G.O. is jealous', ['POG'], 'Disruption', null, [1, 2], null));
-    this.plotEvents.push(new Plot('Get emotional support', ['POD'], 'Disruption', 'GWEN suffers from violence', null, null));
-    this.plotEvents.push(new Plot('Suspicious of disloyalty', ['POG'], 'Disruption', null, null, [-2, -1]));
+    this.plotEvents.push(new Plot('In a relationship', ['POG'], 'Opening', null, null, null, 0));
+    this.plotEvents.push(new Plot('Dating', ['POG', 'POD'], 'Opening', null, null, null, 0));
+    this.plotEvents.push(new Plot('Encounter', ['POD'], 'Opening', null, null, null, 0));
+    this.plotEvents.push(new Plot('Love at first sight', ['POD'], 'Opening', null, [1, 2], null, 1));
 
-    this.plotEvents.push(new Plot('Moral conflict', ['POG', 'POD'], 'Crisis', null, null, null));
-    this.plotEvents.push(new Plot('Threatens you', ['POG'], 'Crisis', null, [-2, -1], null));
-    this.plotEvents.push(new Plot('Caught cheating on you', ['POG'], 'Crisis', null, null, [-2, -1]));
-    this.plotEvents.push(new Plot('Caught stealing from you', ['POG'], 'Crisis', null, null, [-2, -1]));
+    this.plotEvents.push(new Plot('Disagreement in relationship', ['POG', 'POD'], 'Disruption', null, null, null, -1));
+    this.plotEvents.push(new Plot('Seduction', ['POD'], 'Disruption', null, [1, 2], null, 1));
+    this.plotEvents.push(new Plot('GWEN suffers from violence', ['POG'], 'Disruption', null, [-2, -1], null, -1));
+    this.plotEvents.push(new Plot('G.O. is jealous', ['POG'], 'Disruption', null, [1, 2], null, -1));
+    this.plotEvents.push(new Plot('Get emotional support', ['POD'], 'Disruption', 'GWEN suffers from violence', null, null, 1));
+    this.plotEvents.push(new Plot('Suspicious of disloyalty', ['POG'], 'Disruption', null, null, [-2, -1], -1));
 
-    this.plotEvents.push(new Plot('Stay together', ['POG', 'POD'], 'Choice', null, null, null));
-    this.plotEvents.push(new Plot('Break up', ['POG', 'POD'], 'Choice', null, null, null));
-    this.plotEvents.push(new Plot('Seek help', ['POG', 'POD'], 'Choice', null, null, null));
-    this.plotEvents.push(new Plot('Stand up for yourself', ['POG', 'POD'], 'Choice', null, null, null));
+    this.plotEvents.push(new Plot('Moral conflict', ['POG', 'POD'], 'Crisis', null, null, null, 0));
+    this.plotEvents.push(new Plot('Threatens you', ['POG'], 'Crisis', null, [-2, -1], null, -1));
+    this.plotEvents.push(new Plot('Caught cheating on you', ['POG'], 'Crisis', null, null, [-2, -1], -1));
+    this.plotEvents.push(new Plot('Caught stealing from you', ['POG'], 'Crisis', null, null, [-2, -1], -1));
+
+    this.plotEvents.push(new Plot('Stay together', ['POG', 'POD'], 'Choice', null, null, null, 0));
+    this.plotEvents.push(new Plot('Break up', ['POG', 'POD'], 'Choice', null, null, null, 0));
+    this.plotEvents.push(new Plot('Seek help', ['POG', 'POD'], 'Choice', null, null, null, 0));
+    this.plotEvents.push(new Plot('Stand up for yourself', ['POG', 'POD'], 'Choice', null, null, null, 0));
 
 
     // populate initial options
@@ -125,7 +133,7 @@ export class StorylineGeneratorComponent implements OnInit {
           if (plot.desirabilityValues == null && plot.honestyValues == null) {
             this.openingEventsPOD.push(plot);
           } else {
-            if (this.POD.desirability > 0 && plot.desirabilityValues[0] === 1) {
+            if (this.POD.desirability > 0  && plot.desirabilityValues[0] === 1) {
               this.openingEventsPOD.push(plot);
             }
           }
@@ -182,7 +190,7 @@ export class StorylineGeneratorComponent implements OnInit {
         this.choiceEventsPOD.push(plot); // remove POG's choice for POD later
       }
     });
-
+    console.log('pod opening length: ' + this.openingEventsPOD);
     this.cards = this.openingEventsPOG;
   }
 
@@ -292,12 +300,19 @@ export class StorylineGeneratorComponent implements OnInit {
           this.selectedEventsPOD.push(card.name);
           this.filledPOD = true;
           this.filledPOG = false;
-          this.cards = this.choiceEventsPOG;
-          this.step = 'ChoicePOG';
+          this.showConsequence = true;
+          this.textConsequence = true;
+          this.generateConsequence(this.scorePOG, this.scorePOD);
+          // this.step = 'Consequence';
           console.log('POD: ' + `${this.selectedEventsPOD}`);
         }
         break;
       }
+      // case 'Consequence': {
+      //   this.textConsequence = true;
+      //   this.generateConsequence(this.scorePOG, this.scorePOD);
+      //   break;
+      // }
       default: {
         break;
       }
@@ -307,6 +322,32 @@ export class StorylineGeneratorComponent implements OnInit {
   setText(text: string) {
     this.selection = text;
   }
+
+  generateConsequence(score1: number, score2: number) { // need to have encompassing cases for 'Stand up for yourself' and 'Seek Help'
+    if (score1 > score2 && this.selectionChoicePOG === 'Stay together') {
+      this.consequence = 'Happy with POG';
+    } else if (score1 < score2 && this.selectionChoicePOG === 'Stay together') {
+      this.consequence = 'Sad with POG';
+    } else if (score2 > score1 && this.selectionChoicePOG === 'Stay together') {
+      this.consequence = 'Happy with POD';
+    } else if (score2 > score1 && this.selectionChoicePOG === 'Stay together') {
+      this.consequence = 'Happy with POD';
+    } else if (score1 < score2 && this.selectionChoicePOG === 'Stay together') {
+      this.consequence = 'Sad with POD';
+    } else if (this.selectionChoicePOG === 'Stand up for yourself') {
+      this.consequence = 'Alone at last';
+    }
+    this.consequence = 'Happy with POG';
+  }
+
+  // public navigate(event: Event) {
+  //   event.preventDefault();
+  //   this.router.navigate(['storyline-generator'], { state: {
+  //     POGHonesty: this.POG.getHonesty(),
+  //     POGDesirability: this.POG.getDesirability(),
+  //     PODHonesty: this.POD.getHonesty(),
+  //     PODDesirability: this.POD.getDesirability() } });
+  // }
 
   // toggleShow(show: boolean) {
   //   show = !show;

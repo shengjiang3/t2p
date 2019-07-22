@@ -19,15 +19,14 @@
     <mat-grid-tile><mat-card *ngIf="showDisruptionPOG && textDisruptionPOG">{{ selectionDisruptionPOG }}</mat-card></mat-grid-tile>
     <mat-grid-tile><mat-card *ngIf="showConflictPOG && textConflictPOG">{{ selectionConflictPOG }}</mat-card></mat-grid-tile>
     <mat-grid-tile><mat-card *ngIf="showChoicePOG && textChoicePOG">{{ selectionChoicePOG }}</mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
+    <mat-grid-tile rowspan="2"><mat-card *ngIf="textConsequence" style="margin: auto;">{{ consequence }}</mat-card></mat-grid-tile>
 
     <mat-grid-tile><h3>POD</h3></mat-grid-tile>
     <mat-grid-tile><mat-card *ngIf="showOpeningPOD && textOpeningPOD">{{ selectionOpeningPOD }}</mat-card></mat-grid-tile>
     <mat-grid-tile><mat-card *ngIf="showDisruptionPOD && textDisruptionPOD">{{ selectionDisruptionPOD }}</mat-card></mat-grid-tile>
     <mat-grid-tile><mat-card *ngIf="showConflictPOD && textConflictPOD">{{ selectionConflictPOD }}</mat-card></mat-grid-tile>
     <mat-grid-tile><mat-card *ngIf="showChoicePOD && textChoicePOD">{{ selectionChoicePOD }}</mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-
+    <!-- <mat-grid-tile><mat-card></mat-card></mat-grid-tile> -->
   </mat-grid-list>
 
   <mat-card class="selector">

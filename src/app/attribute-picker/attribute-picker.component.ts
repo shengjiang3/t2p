@@ -23,23 +23,19 @@ export class AttributePickerComponent implements OnInit {
 
   public onPOGHonestySliderChange(event: MatSliderChange) {
     this.POG.setHonesty(event.value);
-    console.log('POG Honesty: ' + this.POG.getHonesty());
   }
 
   public onPOGDesirabilitySliderChange(event: MatSliderChange) {
     this.POG.setDesirability(event.value);
-    console.log('POG Desirability: ' + this.POG.getDesirability());
   }
 
   public onPODHonestySliderChange(event: MatSliderChange) {
     this.POD.setHonesty(event.value);
-    console.log('POD Honesty: ' + this.POD.getHonesty());
 
   }
 
   public onPODDesirabilitySliderChange(event: MatSliderChange) {
     this.POD.setDesirability(event.value);
-    console.log('POD Desirability: ' + this.POD.getDesirability());
   }
 
   public navigate(event: Event) {
