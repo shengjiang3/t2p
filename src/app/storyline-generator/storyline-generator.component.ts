@@ -33,6 +33,24 @@ export class StorylineGeneratorComponent implements OnInit {
   filledPOG = false;
   filledPOD = false;
 
+  textOpeningPOG = false;
+  textOpeningPOD = false;
+  textDisruptionPOG = false;
+  textDisruptionPOD = false;
+  textConflictPOG = false;
+  textConflictPOD = false;
+  textChoicePOG = false;
+  textChoicePOD = false;
+
+  selectionOpeningPOG = '';
+  selectionOpeningPOD = '';
+  selectionDisruptionPOG = '';
+  selectionDisruptionPOD = '';
+  selectionConflictPOG = '';
+  selectionConflictPOD = '';
+  selectionChoicePOG = '';
+  selectionChoicePOD = '';
+
   private plotEvents: Plot[] = []; // holds all possible plot events
   cards: Plot[] = []; // options that show up
   selectedEventsPOG: string[] = []; // selected options for POG
@@ -172,10 +190,11 @@ export class StorylineGeneratorComponent implements OnInit {
     switch (this.step) {
       case 'OpeningPOG': {
         if (this.filledPOG === false) {
+          this.textOpeningPOG = true;
+          this.selectionOpeningPOG = this.selection;
           this.selectedEventsPOG.push(card.name);
           this.filledPOG = true;
           this.showOpeningPOD = true;
-          console.log('opening POD status: ' + this.showOpeningPOD);
           this.cards = this.openingEventsPOD;
           this.step = 'OpeningPOD';
           console.log('POG: ' + `${this.selectedEventsPOG}`);
@@ -184,6 +203,8 @@ export class StorylineGeneratorComponent implements OnInit {
       }
       case 'OpeningPOD': {
         if (this.filledPOG === true && this.filledPOD === false) {
+          this.textOpeningPOD = true;
+          this.selectionOpeningPOD = this.selection;
           this.selectedEventsPOD.push(card.name);
           this.filledPOD = true;
           this.filledPOG = false;
@@ -196,6 +217,8 @@ export class StorylineGeneratorComponent implements OnInit {
       }
       case 'DisruptionPOG': {
         if (this.filledPOG === false && this.filledPOD === true) {
+          this.textDisruptionPOG = true;
+          this.selectionDisruptionPOG = this.selection;
           this.selectedEventsPOG.push(card.name);
           this.filledPOG = true;
           this.filledPOD = false;
@@ -208,6 +231,8 @@ export class StorylineGeneratorComponent implements OnInit {
       }
       case 'DisruptionPOD': {
         if (this.filledPOG === true && this.filledPOD === false) {
+          this.textDisruptionPOD = true;
+          this.selectionDisruptionPOD = this.selection;
           this.selectedEventsPOD.push(card.name);
           this.filledPOD = true;
           this.filledPOG = false;
@@ -220,6 +245,8 @@ export class StorylineGeneratorComponent implements OnInit {
       }
       case 'CrisisPOG': {
         if (this.filledPOG === false && this.filledPOD === true) {
+          this.textConflictPOG = true;
+          this.selectionConflictPOG = this.selection;
           this.selectedEventsPOG.push(card.name);
           this.filledPOG = true;
           this.filledPOD = false;
@@ -232,6 +259,8 @@ export class StorylineGeneratorComponent implements OnInit {
       }
       case 'CrisisPOD': {
         if (this.filledPOG === true && this.filledPOD === false) {
+          this.textConflictPOD = true;
+          this.selectionConflictPOD = this.selection;
           this.selectedEventsPOD.push(card.name);
           this.filledPOD = true;
           this.filledPOG = false;
@@ -244,6 +273,8 @@ export class StorylineGeneratorComponent implements OnInit {
       }
       case 'ChoicePOG': {
         if (this.filledPOG === false && this.filledPOD === true) {
+          this.textChoicePOG = true;
+          this.selectionChoicePOG = this.selection;
           this.selectedEventsPOG.push(card.name);
           this.filledPOG = true;
           this.filledPOD = false;
@@ -256,6 +287,8 @@ export class StorylineGeneratorComponent implements OnInit {
       }
       case 'ChoicePOD': {
         if (this.filledPOG === true && this.filledPOD === false) {
+          this.textChoicePOD = true;
+          this.selectionChoicePOD = this.selection;
           this.selectedEventsPOD.push(card.name);
           this.filledPOD = true;
           this.filledPOG = false;
@@ -269,6 +302,10 @@ export class StorylineGeneratorComponent implements OnInit {
         break;
       }
     }
+  }
+
+  setText(text: string) {
+    this.selection = text;
   }
 
   // toggleShow(show: boolean) {
