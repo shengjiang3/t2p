@@ -112,6 +112,8 @@ mat-card {
   border: 1px solid #000000;
   transition: none !important;
   box-shadow: none !important;
+  font-family: 'Monument Grotesk', 'Arial';
+  font-size: 1.0rem;
 }
 
 .options {

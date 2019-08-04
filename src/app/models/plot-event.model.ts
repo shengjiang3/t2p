@@ -4,7 +4,9 @@ export class Plot {
   act: string;
   preselection?: string;
   desirabilityValues: number[];
+  // desirabilityValues: string[];
   honestyValues: number[];
+  // honestyValues: string[];
   value: number;
 
   constructor(name: string, partner: string[], act: string, preselection: string, desirabilityValues: number[], honestyValues: number[], value: number) {

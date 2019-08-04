@@ -1,9 +1,8 @@
-<!-- <h1> TEST ROUTING</h1> -->
 <!DOCTYPE html>
 
 <mat-card-title class="card-title">
   <h1>Choose your attributes</h1>
-  <h2>Use the sliders below to set the Honesty and Desirability attributes for each girlfriend. When you're finished, click the Generate Characters button to start creating your storyline.</h2>
+  <h2>Use the sliders below to set the Honesty and Desirability attributes for each partner. Try different combinations of attributes for each partner to explore ways of maximizing dramatic contrast. When you're finished, click the Generate Characters button to start creating your storyline.</h2>
 </mat-card-title>
 
 <body>
@@ -23,8 +22,6 @@
           tickInterval="1"
           value="0"
           (input)="onPOGHonestySliderChange($event)">
-          <!-- input [(ngModel)]="POG.honesty" -->
-          <!-- (input)="onSliderChange($event)" -->
         </mat-slider>
       </div>
   </mat-grid-tile>
@@ -86,12 +83,4 @@
       <a href="#" (click)="navigate($event)">GENERATE</a>
     </button>
 </div>
-
-<!-- <div class="format-value-text">
-  <p>Honesty POG: {{ POG.honesty }}</p>
-  <p>Desirability POD: {{ POG.desirability }}</p>
-  <p>Honesty POD: {{ POD.honesty }}</p>
-  <p>Desirability POD: {{ POD.desirability }}</p>
-</div> -->
-
 </body>

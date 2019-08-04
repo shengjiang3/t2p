@@ -2,8 +2,7 @@
 
 <mat-card-title class="card-title">
   <h1>Story Summary</h1>
-  <h2>The following storyline was generated based off of the characteristics you selected for each girlfriend. Click restart to explore another path.</h2>
-  <img src="assets/img.png" style="width:1300px; transition: none !important;">
+  <h2>The following storyline was generated based off of the characteristics you selected for each partner. Click restart to explore another path.</h2>
 </mat-card-title>
 
 <body>
@@ -16,20 +15,17 @@
     <mat-grid-tile><h3>Consequence</h3></mat-grid-tile>
 
     <mat-grid-tile><h3>POG</h3></mat-grid-tile>
-    <mat-grid-tile><p>
-      <mat-card><p>In a relationship</p></mat-card>
-    </p></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ openingPOG }}</mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ disruptionPOG }}</mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ conflictPOG }}</mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ choicePOG }}</mat-card></mat-grid-tile>
+    <mat-grid-tile rowspan="2"><mat-card>{{ consequence }}</mat-card></mat-grid-tile>
 
     <mat-grid-tile><h3>POD</h3></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
-    <mat-grid-tile><mat-card></mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ openingPOD }}</mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ disruptionPOD }}</mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ conflictPOD }}</mat-card></mat-grid-tile>
+    <mat-grid-tile><mat-card>{{ choicePOD }}</mat-card></mat-grid-tile>
   </mat-grid-list>
 
   <div class="button-format">
