@@ -77,26 +77,26 @@ export class StorylineGeneratorComponent implements OnInit {
     this.POG = new POG(window.history.state.POGHonesty, window.history.state.POGDesirability);
     this.POD = new POD(window.history.state.PODHonesty, window.history.state.PODDesirability);
 
-    this.plotEvents.push(new Plot('In a relationship', ['POG'], 'Opening', null, null, null, 0));
-    this.plotEvents.push(new Plot('Dating', ['POG', 'POD'], 'Opening', null, null, null, 0));
-    this.plotEvents.push(new Plot('Encounter', ['POD'], 'Opening', null, null, null, 0));
-    this.plotEvents.push(new Plot('Love at first sight', ['POD'], 'Opening', null, [1, 2], null, 1));
+    this.plotEvents.push(new Plot('In a relationship', ['POG'], 'Opening', null, null, 0));
+    this.plotEvents.push(new Plot('Dating', ['POG', 'POD'], 'Opening', null, null, 0));
+    this.plotEvents.push(new Plot('Encounter', ['POD'], 'Opening', null, null, 0));
+    this.plotEvents.push(new Plot('Love at first sight', ['POD'], 'Opening', [1, 2], null, 1));
 
-    this.plotEvents.push(new Plot('Disagreement in relationship', ['POG', 'POD'], 'Disruption', null, null, null, -1));
-    this.plotEvents.push(new Plot('Seduction', ['POD'], 'Disruption', null, [1, 2], null, 1));
-    this.plotEvents.push(new Plot('GWEN suffers from violence', ['POG'], 'Disruption', null, [-2, -1], null, -1));
-    this.plotEvents.push(new Plot('G.O. is jealous', ['POG'], 'Disruption', null, [1, 2], null, -1));
-    this.plotEvents.push(new Plot('Suspicious of disloyalty', ['POG'], 'Disruption', null, null, [-2, -1], -1));
+    this.plotEvents.push(new Plot('Disagreement in relationship', ['POG', 'POD'], 'Disruption', null, null, -1));
+    this.plotEvents.push(new Plot('Seduction', ['POD'], 'Disruption', [1, 2], null, 1));
+    this.plotEvents.push(new Plot('GWEN suffers from violence', ['POG'], 'Disruption', [-2, -1], null, -1));
+    this.plotEvents.push(new Plot('G.O. is jealous', ['POG'], 'Disruption', [1, 2], null, -1));
+    this.plotEvents.push(new Plot('Suspicious of disloyalty', ['POG'], 'Disruption', null, [-2, -1], -1));
 
-    this.plotEvents.push(new Plot('Moral conflict', ['POG', 'POD'], 'Crisis', null, null, null, 0));
-    this.plotEvents.push(new Plot('Threatens you', ['POG'], 'Crisis', null, [-2, -1], null, -1));
-    this.plotEvents.push(new Plot('Caught cheating on you', ['POG'], 'Crisis', null, null, [-2, -1], -1));
-    this.plotEvents.push(new Plot('Caught stealing from you', ['POG'], 'Crisis', null, null, [-2, -1], -1));
+    this.plotEvents.push(new Plot('Moral conflict', ['POG', 'POD'], 'Crisis', null, null, 0));
+    this.plotEvents.push(new Plot('Threatens you', ['POG'], 'Crisis', [-2, -1], null, -1));
+    this.plotEvents.push(new Plot('Caught cheating on you', ['POG'], 'Crisis', null, [-2, -1], -1));
+    this.plotEvents.push(new Plot('Caught stealing from you', ['POG'], 'Crisis', null, [-2, -1], -1));
 
-    this.plotEvents.push(new Plot('Stay together', ['POG', 'POD'], 'Choice', null, null, null, 0));
-    this.plotEvents.push(new Plot('Break up', ['POG', 'POD'], 'Choice', null, null, null, 0));
-    this.plotEvents.push(new Plot('Seek help', ['POD'], 'Choice', null, null, null, 0));
-    this.plotEvents.push(new Plot('Stand up for yourself', ['POG'], 'Choice', null, null, null, 0));
+    this.plotEvents.push(new Plot('Stay together', ['POG', 'POD'], 'Choice', null, null, 0));
+    this.plotEvents.push(new Plot('Break up', ['POG', 'POD'], 'Choice', null, null, 0));
+    this.plotEvents.push(new Plot('Seek help', ['POD'], 'Choice', null, null, 0));
+    this.plotEvents.push(new Plot('Stand up for yourself', ['POG'], 'Choice', null, null, 0));
 
     this.plotEvents.forEach(plot => {
       if (plot.act === 'Opening') {
@@ -219,8 +219,7 @@ export class StorylineGeneratorComponent implements OnInit {
           this.selectedEventsPOG.push(card.name);
           this.scorePOG += card.value;
           if (card.name === 'GWEN suffers from violence') { // check previous selection
-            this.disruptionEventsPOD.push(new Plot('Get emotional support', ['POD'], 'Disruption',
-            'GWEN suffers from violence', null, null, 1));
+            this.disruptionEventsPOD.push(new Plot('Get emotional support', ['POD'], 'Disruption', null, null, 1));
           }
           this.filledPOG = true;
           this.filledPOD = false;
